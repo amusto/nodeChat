@@ -1,11 +1,13 @@
 {
 "name": "RealTimeWebChat",
 "version": "1.0.0",
+    "scripts": {"start": "node index.js"
+},
 "description": "Real time web chat - Example by Armando Musto",
 "dependencies": {
-"socket.io": "latest",
-"express": "latest",
-"jade": "latest"
+    "socket.io": "latest",
+    "express": "latest",
+    "jade": "latest"
 },
 "author": "Armando Musto"
 }

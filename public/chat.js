@@ -5,12 +5,16 @@ window.onload = function() {
     var field = document.getElementById("field");
     var sendButton = document.getElementById("send");
     var content = document.getElementById("content");
+    var name = document.getElementById("name");
 
     socket.on('message', function (data) {
         if(data.message) {
             messages.push(data.message);
             var html = '';
+            console.log(messages);
             for(var i=0; i<messages.length; i++) {
+                console.log(messages[i].username);
+                html += '<b>' + (messages[i].username ? messages[i].username : 'hello') + ': </b>';
                 html += messages[i] + '<br />';
             }
             content.innerHTML = html;
@@ -20,8 +24,12 @@ window.onload = function() {
     });
 
     sendButton.onclick = function() {
-        var text = field.value;
-        socket.emit('send', { message: text });
+        if(name.value == "") {
+            alert("Please type your name!");
+        } else {
+            var text = field.value;
+            socket.emit('send', { message: text, username: name.value });
+        }
     };
 
 }
