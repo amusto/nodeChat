@@ -9,13 +9,14 @@ window.onload = function() {
 
     socket.on('message', function (data) {
         if(data.message) {
-            messages.push(data.message);
-            var html = '';
+            console.log(data);
+            var message = {message:data.message,username:data.username};
+            messages.push(message);
             console.log(messages);
+            var html = '';
             for(var i=0; i<messages.length; i++) {
-                console.log(messages[i].username);
                 html += '<b>' + (messages[i].username ? messages[i].username : 'hello') + ': </b>';
-                html += messages[i] + '<br />';
+                html += messages[i].message + '<br />';
             }
             content.innerHTML = html;
         } else {
@@ -29,6 +30,7 @@ window.onload = function() {
         } else {
             var text = field.value;
             socket.emit('send', { message: text, username: name.value });
+            filed.value = "";
         }
     };
 
